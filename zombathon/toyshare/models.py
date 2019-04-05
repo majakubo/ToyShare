@@ -50,5 +50,4 @@ class Rate(models.Model):
 class Wants(models.Model):
     user_id_ref = models.ForeignKey(ExtUser, on_delete=models.PROTECT,
                                     related_name='user_id_ref')
-    toy_id_ref = models.ForeignKey(Toy, on_delete=models.PROTECT,
-related_name='toy_id_ref')
+    toy_id_ref = models.ForeignKey(Toy, on_delete=models.PROTECT, related_name='toy_id_ref')
