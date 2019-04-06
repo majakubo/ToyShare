@@ -6,6 +6,7 @@ from rest_framework import status
 from toyshare.serializers import *
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework.authtoken.models import Token
 from .permissions import IsOwnerOrReadOnly
 
 
@@ -42,18 +43,45 @@ class ToysDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class ToySearchList(generics.ListAPIView):
+
     queryset = Toy.objects.all()
     serializer_class = ToySerializer
 
+    #def get_queryset(self):
+     #   user = User.objects.get(id=self.request.user.id)
+        #ext_user = ExtUser.objects.get(userbase=user)
+
+        #owner =
+
+
 
 class RentingList(generics.ListAPIView):
-    queryset = Renting.objects.all()
+    #queryset = Renting.objects.all()
     serializer_class = RentingSerializer
+
+    def get_queryset(self):
+        user = User.objects.get(id=self.request.user.id)
+        ext_user = ExtUser.objects.get(userbase=user)
+
+        a = Renting.objects.filter(owner_id_ref=ext_user.id)
+        b = Renting.objects.filter(user_id_ref=ext_user.id)
+        return a.union(b)
+
 
 
 class RentingDetail(generics.RetrieveDestroyAPIView):
-    queryset = Renting.objects.all()
+    #queryset = Renting.objects.all()
     serializer_class = RentingSerializer
+    def get_queryset(self):
+        user = User.objects.get(id=self.request.user.id)
+        ext_user = ExtUser.objects.get(userbase=user)
+        print(ext_user)
+
+        a = Renting.objects.filter(owner_id_ref=ext_user.id)
+        b = Renting.objects.filter(user_id_ref=ext_user.id)
+
+        return a.union(b)
+
 
 class WantedList(generics.ListCreateAPIView):
     queryset = Wanted.objects.all()
@@ -62,3 +90,5 @@ class WantedList(generics.ListCreateAPIView):
 class UnwantedList(generics.ListCreateAPIView):
     queryset = Unwanted.objects.all()
     serializer_class = UnwantedSerializer
+
+
