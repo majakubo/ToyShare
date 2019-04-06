@@ -1,4 +1,6 @@
 from django.urls import path
+from rest_framework.urlpatterns import format_suffix_patterns
+from toyshare import views
 
 urlpatterns = [
     path('myprofile/', views.MyProfile.as_view()),
