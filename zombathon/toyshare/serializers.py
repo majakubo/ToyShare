@@ -24,7 +24,7 @@ class ExtUserSerializer(serializers.ModelSerializer):
 
 
 class ToySerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
+    owner = serializers.ReadOnlyField(source='owner.id')
     class Meta:
         model = Toy
         fields = ('id', 'name', 'description',
@@ -48,13 +48,13 @@ class RateSerializer(serializers.ModelSerializer):
 
 
 class WantedSerializer(serializers.ModelSerializer):
-    user_id_ref = serializers.ReadOnlyField(source='owner.id')
+    user_id_ref = serializers.ReadOnlyField(source='user_id_ref.id')
     class Meta:
         model = Wanted
-        fields = ('toy_id_ref','user_id_ref')
+        fields = ('toy_id_ref', 'user_id_ref')
 
 class UnwantedSerializer(serializers.ModelSerializer):
-    user_id_ref = serializers.ReadOnlyField(source='owner.id')
+    user_id_ref = serializers.ReadOnlyField(source='user_id_ref.id')
     class Meta:
         model = Unwanted
         fields = ('toy_id_ref','user_id_ref')

@@ -23,7 +23,7 @@ class ExtUser(models.Model):
 class Toy(models.Model):
     name = models.CharField(max_length=30)
     description = models.TextField(max_length=250)
-    photo_path = models.TextField(max_length=100)
+    photo_path = models.TextField(max_length=10000)
     condition = models.DecimalField(max_digits=2, decimal_places=0)
     age = models.DecimalField(max_digits=3, decimal_places=0)
     players_quantity = models.DecimalField(max_digits=2, decimal_places=0)
