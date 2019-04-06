@@ -92,6 +92,9 @@ class RentingDetail(generics.RetrieveDestroyAPIView):
 
         return a.union(b)
 
+class UserList(generics.ListCreateAPIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
 
 class WantedList(generics.ListCreateAPIView):
     queryset = Wanted.objects.all()

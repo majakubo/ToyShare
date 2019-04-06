@@ -6,7 +6,7 @@ from .models import *
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'username', 'email')
+        fields = ('username', 'email', 'password')
 
 
 class ExtUserSerializer(serializers.ModelSerializer):

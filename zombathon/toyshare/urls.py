@@ -11,6 +11,7 @@ urlpatterns = [
     path('rentings/<int:pk>', views.RentingDetail.as_view()),
     path('wanted/', views.WantedList.as_view()),
     path('unwanted/', views.UnwantedList.as_view()),
+    path('users/', views.UserList.as_view())
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
