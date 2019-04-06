@@ -84,7 +84,6 @@ class RentingDetail(generics.RetrieveDestroyAPIView):
 
 class UserList(generics.ListCreateAPIView):
     serializer_class = UserSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = User.objects.all()
 
 class WantedList(generics.ListCreateAPIView):
