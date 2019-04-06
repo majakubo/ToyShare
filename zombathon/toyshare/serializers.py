@@ -3,50 +3,45 @@ from rest_framework import serializers
 from .models import *
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'groups')
+        fields = ('url', 'username', 'email')
 
 
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ('url', 'name')
-
-
-class ExtUserRegisterSerializer(serializers.ModelSerializer):
-    username = serializers.CharField()
-    user_mail = serializers.EmailField()
-    rank = serializers.IntegerField()
+class ExtUserSerializer(serializers.ModelSerializer):
+    login = serializers.SerializerMethodField()
 
     class Meta:
         model = ExtUser
-        fields = ('userbase', 'user_mail', 'tel',
+
+        fields = ('userbase', 'tel',
                   'city', 'street', 'house_number',
-                  'post_code', 'age', 'login', 'rank')
+                  'post_code', 'age', 'login', 'rank', 'login',)
+
+    def get_login(self, object):
+        return object.login
 
 
 class ToySerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
     class Meta:
         model = Toy
+        fields = ('name', 'description',
+                  'photo_path',
+                  'condition', 'age',
+                  'players_quantity', 'owner')
 
 
 class RentingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Renting
+        fields = ('begin_date', 'toy_id',
+                  'owner_id', 'user_id_ref')
 
 
 class RateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Renting
-
-
-class WantsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Wants
-
-
-class UnwantedSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Unwanted
+        fields = ('value', 'message', 'toy_condition',
+                  'renting_id_ref', 'user_id_ref')
