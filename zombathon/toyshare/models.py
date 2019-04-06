@@ -29,7 +29,7 @@ class Toy(models.Model):
 
 class Renting(models.Model):
     begin_date = models.DateField()
-    end_date = models.DateField()
+    end_date = models.DateField(blank=True)
     toy_id_ref = models.ForeignKey(Toy, on_delete=models.PROTECT)
     owner_id_ref = models.ForeignKey(ExtUser, on_delete=models.PROTECT, related_name="owner_id")
     user_id_ref = models.ForeignKey(ExtUser, on_delete=models.PROTECT, related_name="user_id")
