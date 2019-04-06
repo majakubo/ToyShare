@@ -28,6 +28,7 @@ class Toy(models.Model):
     owner = models.ForeignKey('auth.User', related_name='toys', on_delete=models.CASCADE)
     def save(self, *args, **kwargs):
         super(Toy, self).save(*args, **kwargs)
+
 class Renting(models.Model):
     begin_date = models.DateField()
     end_date = models.DateField(blank=True)

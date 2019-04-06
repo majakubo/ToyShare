@@ -16,7 +16,7 @@ class ExtUserSerializer(serializers.ModelSerializer):
         model = ExtUser
         fields = ('userbase', 'tel',
                   'city', 'street', 'house_number',
-                  'post_code', 'age', 'login', 'rank', 'login',)
+                  'post_code', 'age', 'login', 'rank')
 
     def get_login(self, object):
         return object.login
@@ -35,8 +35,8 @@ class ToySerializer(serializers.ModelSerializer):
 class RentingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Renting
-        fields = ('begin_date', 'toy_id',
-                  'owner_id', 'user_id_ref')
+        fields = ('begin_date', 'toy_id_ref',
+                  'owner_id_ref', 'user_id_ref')
 
 
 class RateSerializer(serializers.ModelSerializer):
