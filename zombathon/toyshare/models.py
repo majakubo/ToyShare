@@ -11,9 +11,11 @@ class ExtUser(models.Model):
     street = models.CharField(max_length=30, blank=True)
     house_number = models.CharField(max_length=10, blank=True)
     post_code = models.CharField(max_length=6, blank=True)
+    rank = models.DecimalField(max_digits=2, decimal_places=1, blank=True)
     age = models.DecimalField(max_digits=2, decimal_places=0, blank=True)
     login = models.CharField(max_length=30, blank=True)
     transactions_quantity = models.DecimalField(max_digits=5, decimal_places=0, blank=True)
+
 
 
 class Toy(models.Model):

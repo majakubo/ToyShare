@@ -2,17 +2,21 @@ from django.test import TestCase
 from .models import ExtUser, Toy, Renting, Rate, Wants
 from django.contrib.auth.models import User
 import datetime
+from toyshare.serializers import ToySerializer, ExtUserRegisterSerializer
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
 
 
 def create_user(phone='7244427575', user_n='majaku'):
     u = User(username=user_n, password='123')
     u.save()
     e = ExtUser(userbase=u,
-                tel=phone,
+                tel='phone',
                 city='Kolobrzeg',
                 street='Knierskiego',
                 house_number='12',
                 post_code='78-100',
+                rank=2.0,
                 age=12.0,
                 login='majaku',
                 transactions_quantity=12
@@ -104,4 +108,32 @@ class ExtUserTests(TestCase):
         print(5,w.user_id_ref.tel)
 
 
-# Create your tests here
+class ToySerializerTest(TestCase):
+    def test_creating_serializer(self):
+        u = User(username='majaku', password='bar')
+        u.save()
+        e = ExtUser(userbase=u,
+                tel='frphone',
+                city='Kolobrzeg',
+                street='Knierskiego',
+                house_number='12',
+                post_code='78-100',
+                age=12.0,
+                rank=2.0,
+                login='majaku',
+                transactions_quantity=12
+                )
+
+        e.save()
+        o = ExtUserRegisterSerializer(e)
+        print(o.data)
+        t = Toy(name='majaku',
+            description="Fajny zestaw klocków",
+            photo_path="data/zdj1.jpg",
+            condition="5",
+            age=7,
+            players_quantity=1,
+            user_id_ref=e)
+        serializer = ToySerializer(t)
+        serializer.data
+        print(serializer.data)

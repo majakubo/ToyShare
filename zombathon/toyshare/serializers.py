@@ -15,38 +15,37 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'name')
 
 
-class ExtUserRegisterSerializer(serializers.ModelSerializer):
-    username = serializers.CharField()
-    user_mail = serializers.EmailField()
-    rank = serializers.IntegerField()
+class ExtUserSerializer(serializers.ModelSerializer):
+    login = serializers.SerializerMethodField()
 
     class Meta:
         model = ExtUser
-        fields = ('username', 'user_mail', 'tel',
-                  'city', 'street', 'house_nunmber',
-                  'post_code', 'age', 'login', 'rank')
+        fields = ('userbase', 'tel',
+                  'city', 'street', 'house_number',
+                  'post_code', 'age', 'login', 'rank', 'login',)
+
+    def get_login(self, object):
+        return object.login
 
 
 class ToySerializer(serializers.ModelSerializer):
     class Meta:
         model = Toy
+        fields = ('name', 'description',
+                  'photo_path',
+                  'condition', 'age',
+                  'players_quantity', 'user_id_ref')
 
 
 class RentingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Renting
+        fields = ('begin_date', 'toy_id',
+                  'owner_id', 'user_id_ref')
 
 
 class RateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Renting
-
-
-class WantsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Wants
-
-
-class UnwantedSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Unwanted
+        fields = ('value', 'message', 'toy_condition',
+                  'renting_id_ref', 'user_id_ref')
