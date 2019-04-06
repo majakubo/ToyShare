@@ -1,11 +1,11 @@
 from django.test import TestCase
 from .models import ExtUser, Toy, Renting, Rate, Wants
 from django.contrib.auth.models import User
-import datetime
-from toyshare.serializers import ToySerializer, ExtUserRegisterSerializer
+
+
+from toyshare.serializers import UserSerializer, ExtUserRegisterSerializer
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-
 
 def create_user(phone='7244427575', user_n='majaku'):
     u = User(username=user_n, password='123')
@@ -105,7 +105,7 @@ class ExtUserTests(TestCase):
         w = Wants(user_id_ref=u,
                   toy_id_ref=t)
 
-        print(5,w.user_id_ref.tel)
+        print(5, w.user_id_ref.tel)
 
 
 class ToySerializerTest(TestCase):
@@ -137,3 +137,4 @@ class ToySerializerTest(TestCase):
         serializer = ToySerializer(t)
         serializer.data
         print(serializer.data)
+

@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls import url
 import toyshare
+
 urlpatterns = [
     path('app/', include('toyshare.urls')),
     path('api-auth/', include('rest_framework.urls')),

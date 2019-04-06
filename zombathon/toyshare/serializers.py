@@ -14,6 +14,7 @@ class ExtUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ExtUser
+
         fields = ('userbase', 'tel',
                   'city', 'street', 'house_number',
                   'post_code', 'age', 'login', 'rank')

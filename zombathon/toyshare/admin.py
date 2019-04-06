@@ -6,5 +6,3 @@ admin.site.register(Renting)
 admin.site.register(Rate)
 admin.site.register(Wants)
 admin.site.register(Unwanted)
-
-# Register your models here.

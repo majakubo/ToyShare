@@ -16,6 +16,8 @@ class ExtUser(models.Model):
     login = models.CharField(max_length=30, blank=True)
     transactions_quantity = models.DecimalField(max_digits=5, decimal_places=0, blank=True)
 
+    def __str__(self):
+        return self.login
 
 
 class Toy(models.Model):
@@ -29,12 +31,19 @@ class Toy(models.Model):
     def save(self, *args, **kwargs):
         super(Toy, self).save(*args, **kwargs)
 
+    def __str__(self):
+        return self.name
+
+
 class Renting(models.Model):
     begin_date = models.DateField()
     end_date = models.DateField(blank=True)
     toy_id_ref = models.ForeignKey(Toy, on_delete=models.PROTECT)
     owner_id_ref = models.ForeignKey(ExtUser, on_delete=models.PROTECT, related_name="owner_id")
     user_id_ref = models.ForeignKey(ExtUser, on_delete=models.PROTECT, related_name="user_id")
+
+    def __str__(self):
+        return str(self.begin_date)+" "+self.owner_id_ref.login+"-"+self.user_id_ref.login
 
 
 class Rate(models.Model):
@@ -44,11 +53,21 @@ class Rate(models.Model):
     renting_id_ref = models.ForeignKey(Renting, on_delete=models.PROTECT)
     user_id_ref = models.ForeignKey(ExtUser, on_delete=models.PROTECT)
 
+    def __str__(self):
+        return self.renting_id_ref.login+" - "+self.user_id_ref.login
+
 
 class Wants(models.Model):
     user_id_ref = models.ForeignKey(ExtUser, on_delete=models.PROTECT)
     toy_id_ref = models.ForeignKey(Toy, on_delete=models.PROTECT)
 
+    def __str__(self):
+        return self.user_id_ref.login+" wants "+self.toy_id_ref.name
+
+
 class Unwanted(models.Model):
     user_id_ref = models.ForeignKey(ExtUser, on_delete=models.PROTECT)
     toy_id_ref = models.ForeignKey(Toy, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.user_id_ref.login+" unwanted "+self.toy_id_ref.name
