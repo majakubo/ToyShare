@@ -6,15 +6,15 @@ from django.contrib.auth.models import User
 
 
 class ExtUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    tel = models.CharField(max_length=12)
-    city = models.CharField(max_length=30)
-    street = models.CharField(max_length=30)
-    house_number = models.CharField(max_length=10)
-    post_code = models.CharField(max_length=6)
-    age = models.DecimalField(max_digits=2, decimal_places=0)
-    login = models.CharField(max_length=30)
-    transactions_quantity = models.DecimalField(max_digits=5, decimal_places=0)
+    userbase = models.OneToOneField(User, on_delete=models.CASCADE)
+    tel = models.CharField(max_length=12, blank=True)
+    city = models.CharField(max_length=30, blank=True)
+    street = models.CharField(max_length=30, blank=True)
+    house_number = models.CharField(max_length=10, blank=True)
+    post_code = models.CharField(max_length=6, blank=True)
+    age = models.DecimalField(max_digits=2, decimal_places=0, blank=True)
+    login = models.CharField(max_length=30, blank=True)
+    transactions_quantity = models.DecimalField(max_digits=5, decimal_places=0, blank=True)
 
 
 class Toy(models.Model):
