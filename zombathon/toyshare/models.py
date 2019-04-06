@@ -47,6 +47,7 @@ class Wants(models.Model):
     user_id_ref = models.ForeignKey(ExtUser, on_delete=models.PROTECT)
     toy_id_ref = models.ForeignKey(Toy, on_delete=models.PROTECT)
 
+
 class Unwanted(models.Model):
     user_id_ref = models.ForeignKey(ExtUser, on_delete=models.PROTECT)
     toy_id_ref = models.ForeignKey(Toy, on_delete=models.PROTECT)
