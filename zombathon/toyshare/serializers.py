@@ -9,6 +9,8 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('username', 'email', 'password')
 
 
+
+
 class ExtUserSerializer(serializers.ModelSerializer):
     login = serializers.SerializerMethodField()
 
