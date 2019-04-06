@@ -24,7 +24,7 @@ class Toy(models.Model):
     condition = models.DecimalField(max_digits=2, decimal_places=0)
     age = models.DecimalField(max_digits=3, decimal_places=0)
     players_quantity = models.DecimalField(max_digits=2, decimal_places=0)
-    user_id_ref = models.ForeignKey(ExtUser, on_delete=models.CASCADE)
+    owner = models.ForeignKey('auth.User', related_name='toy_owner', on_delete=models.CASCADE)
 
 
 class Renting(models.Model):
@@ -47,3 +47,6 @@ class Wants(models.Model):
     user_id_ref = models.ForeignKey(ExtUser, on_delete=models.PROTECT)
     toy_id_ref = models.ForeignKey(Toy, on_delete=models.PROTECT)
 
+class Unwanted(models.Model):
+    user_id_ref = models.ForeignKey(ExtUser, on_delete=models.PROTECT)
+    toy_id_ref = models.ForeignKey(Toy, on_delete=models.PROTECT)

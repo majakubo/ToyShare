@@ -20,4 +20,4 @@ class ExtUserTests(TestCase):
         e.save()
         print(e.tel)
 
-# Create your tests here.
+# Create your tests here
