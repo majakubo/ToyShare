@@ -28,6 +28,7 @@ class Toy(models.Model):
     age = models.DecimalField(max_digits=3, decimal_places=0)
     players_quantity = models.DecimalField(max_digits=2, decimal_places=0)
     owner = models.ForeignKey('auth.User', related_name='toys', on_delete=models.CASCADE)
+
     def save(self, *args, **kwargs):
         super(Toy, self).save(*args, **kwargs)
 
@@ -38,7 +39,7 @@ class Toy(models.Model):
 class Renting(models.Model):
     begin_date = models.DateField()
     end_date = models.DateField(blank=True)
-    toy_id_ref = models.ForeignKey(Toy, on_delete=models.PROTECT)
+    toy_id_ref = models.ForeignKey(Toy, on_delete=models.PROTECT, related_name="toy1")
     owner_id_ref = models.ForeignKey(ExtUser, on_delete=models.PROTECT, related_name="owner_id")
     user_id_ref = models.ForeignKey(ExtUser, on_delete=models.PROTECT, related_name="user_id")
 
