@@ -22,8 +22,8 @@ class ExtUserRegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ExtUser
-        fields = ('username', 'user_mail', 'tel',
-                  'city', 'street', 'house_nunmber',
+        fields = ('userbase', 'user_mail', 'tel',
+                  'city', 'street', 'house_number',
                   'post_code', 'age', 'login', 'rank')
 
 
