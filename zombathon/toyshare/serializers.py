@@ -3,16 +3,10 @@ from rest_framework import serializers
 from .models import *
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'groups')
-
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ('url', 'name')
+        fields = ('url', 'username', 'email')
 
 
 class ExtUserSerializer(serializers.ModelSerializer):
@@ -29,12 +23,13 @@ class ExtUserSerializer(serializers.ModelSerializer):
 
 
 class ToySerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
     class Meta:
         model = Toy
         fields = ('name', 'description',
                   'photo_path',
                   'condition', 'age',
-                  'players_quantity', 'user_id_ref')
+                  'players_quantity', 'owner')
 
 
 class RentingSerializer(serializers.ModelSerializer):

@@ -5,45 +5,52 @@ from rest_framework.response import Response
 from rest_framework import status
 from toyshare.serializers import *
 from rest_framework import viewsets
+from rest_framework import permissions
+from .permissions import IsOwnerOrReadOnly
 
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = User.objects.all().order_by('-date_joined')
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
     serializer_class = UserSerializer
 
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
-class MyProfile(APIView):
-    pass
+class MyProfile(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = ExtUser.objects.all()
+    serializer_class = ExtUserSerializer
 
 
-class ToysCreate(APIView):
-    pass
+class ToysList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
-class ToysList(generics.ListAPIView):
-    pass
+    queryset = Toy.objects.all()
+    serializer_class = ToySerializer
 
 
 class ToysDetail(generics.RetrieveUpdateDestroyAPIView):
-    pass
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = Toy.objects.all()
+    serializer_class = ToySerializer
 
 
-class SearchList(generics.ListAPIView):
-    pass
+class ToySearchList(generics.ListAPIView):
+    queryset = Toy.objects.all()
+    serializer_class = ToySerializer
 
 
 class RentingList(generics.ListAPIView):
-    pass
+    queryset = Renting.objects.all()
+    serializer_class = RentingSerializer
 
 
 class RentingDetail(generics.RetrieveDestroyAPIView):
-    pass
+    queryset = Renting.objects.all()
+    serializer_class = RentingSerializer
