@@ -45,3 +45,15 @@ class RateSerializer(serializers.ModelSerializer):
         model = Renting
         fields = ('value', 'message', 'toy_condition',
                   'renting_id_ref', 'user_id_ref')
+
+class WantedSerializer(serializers.ModelSerializer):
+    user_id_ref = serializers.ReadOnlyField(source='owner.username')
+    class Meta:
+        model = Wanted
+        fileds = ('toy_id_ref','user_id_ref')
+
+class UnwantedSerializer(serializers.ModelSerializer):
+    user_id_ref = serializers.ReadOnlyField(source='owner.username')
+    class Meta:
+        model = Unwanted
+        fields = ('toy_id_ref','user_id_ref')

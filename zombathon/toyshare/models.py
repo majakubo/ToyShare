@@ -58,7 +58,7 @@ class Rate(models.Model):
         return self.renting_id_ref.login+" - "+self.user_id_ref.login
 
 
-class Wants(models.Model):
+class Wanted(models.Model):
     user_id_ref = models.ForeignKey(ExtUser, on_delete=models.PROTECT)
     toy_id_ref = models.ForeignKey(Toy, on_delete=models.PROTECT)
 

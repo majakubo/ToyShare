@@ -9,6 +9,8 @@ urlpatterns = [
     path('toys/<String:range/<int:age>', views.ToySearchList.as_view()),
     path('rentings/', views.RentingList.as_view()),
     path('rentings/<int:pk>', views.RentingDetail.as_view()),
+    path('wanted/', views.WantedList.as_view()),
+    path('unwanted/', views.UnwantedList.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

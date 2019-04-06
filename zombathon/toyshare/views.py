@@ -54,3 +54,11 @@ class RentingList(generics.ListAPIView):
 class RentingDetail(generics.RetrieveDestroyAPIView):
     queryset = Renting.objects.all()
     serializer_class = RentingSerializer
+
+class WantedList(generics.ListCreateAPIView):
+    queryset = Wanted.objects.all()
+    serializer_class = WantedSerializer
+
+class UnwantedList(generics.ListCreateAPIView):
+    queryset = Unwanted.objects.all()
+    serializer_class = UnwantedSerializer
