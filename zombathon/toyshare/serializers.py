@@ -27,7 +27,7 @@ class ToySerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     class Meta:
         model = Toy
-        fields = ('name', 'description',
+        fields = ('id', 'name', 'description',
                   'photo_path',
                   'condition', 'age',
                   'players_quantity', 'owner')
