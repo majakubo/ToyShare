@@ -8,6 +8,7 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework.authtoken.models import Token
 from .permissions import IsOwnerOrReadOnly
+import toyshare.distance as d
 
 
 class UserList(generics.ListAPIView):
@@ -43,15 +44,24 @@ class ToysDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class ToySearchList(generics.ListAPIView):
+    '''
+    def get_queryset(self):
+        user = User.objects.get(id=self.request.user.id)
+        ext_user = list(ExtUser.objects.get(userbase=user))
+        #toy
+        owner = list((Wants.objects.get(toy_id_ref=toy.id)).user_id_ref)
 
-    queryset = Toy.objects.all()
+        loc_user = ext_user[0].street + ext_user[0].house_number +ext_user[0].city
+        loc_owner = owner[0].street +owner[0].house_number +owner[0].city
+
+        dist = d.calculate_distance(loc_user, loc_owner)
+        print(dist)
+    '''
+
+    queryset = Renting.objects.all()
     serializer_class = ToySerializer
 
-    #def get_queryset(self):
-     #   user = User.objects.get(id=self.request.user.id)
-        #ext_user = ExtUser.objects.get(userbase=user)
 
-        #owner =
 
 
 
