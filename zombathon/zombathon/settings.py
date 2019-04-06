@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'toyshare.apps.ToyshareConfig',
     'rest_auth',
-    'allauth',
-    'allauth.account',
     'rest_auth.registration',
 ]
 
@@ -75,9 +73,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'zombathon.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
     'default': {

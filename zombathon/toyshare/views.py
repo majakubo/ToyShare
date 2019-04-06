@@ -82,7 +82,6 @@ class RentingList(generics.ListAPIView):
 class RentingDetail(generics.RetrieveDestroyAPIView):
     #queryset = Renting.objects.all()
     serializer_class = RentingSerializer
-
     def get_queryset(self):
         user = User.objects.get(id=self.request.user.id)
         ext_user = ExtUser.objects.get(userbase=user)
@@ -92,3 +91,14 @@ class RentingDetail(generics.RetrieveDestroyAPIView):
         b = Renting.objects.filter(user_id_ref=ext_user.id)
 
         return a.union(b)
+
+
+class WantedList(generics.ListCreateAPIView):
+    queryset = Wanted.objects.all()
+    serializer_class = WantedSerializer
+
+class UnwantedList(generics.ListCreateAPIView):
+    queryset = Unwanted.objects.all()
+    serializer_class = UnwantedSerializer
+
+
