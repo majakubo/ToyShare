@@ -48,13 +48,13 @@ class RateSerializer(serializers.ModelSerializer):
 
 
 class WantedSerializer(serializers.ModelSerializer):
-    user_id_ref = serializers.ReadOnlyField(source='owner.username')
+    user_id_ref = serializers.ReadOnlyField(source='owner.id')
     class Meta:
         model = Wanted
         fields = ('toy_id_ref','user_id_ref')
 
 class UnwantedSerializer(serializers.ModelSerializer):
-    user_id_ref = serializers.ReadOnlyField(source='owner.username')
+    user_id_ref = serializers.ReadOnlyField(source='owner.id')
     class Meta:
         model = Unwanted
         fields = ('toy_id_ref','user_id_ref')
